@@ -152,10 +152,10 @@ export default function ParticleGlobe({ state, className }: Props) {
       // Connections between nearby projected points
       ctx.lineWidth = 0.6;
       for (let i = 0; i < proj.length; i += 2) {
-        const a = proj[i];
+        const a = proj[i]!;
         if (a.s < 0.85) continue;
         for (let j = i + 2; j < proj.length; j += 2) {
-          const b = proj[j];
+          const b = proj[j]!;
           if (b.s < 0.85) continue;
           const dx = a.x - b.x;
           const dy = a.y - b.y;
