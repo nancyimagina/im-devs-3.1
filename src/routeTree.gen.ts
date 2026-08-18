@@ -10,12 +10,32 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as CaseStudiesRouteImport } from './routes/case-studies'
+import { Route as ContactRouteImport } from './routes/contact'
 import { Route as ExpertiseRouteImport } from './routes/expertise'
 import { Route as CaseStudiesIndexRouteImport } from './routes/case-studies.index'
+import { Route as CaseStudiesAgioneRouteImport } from './routes/case-studies.agione'
+import { Route as CaseStudiesRenuityRouteImport } from './routes/case-studies.renuity'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CaseStudiesRoute = CaseStudiesRouteImport.update({
+  id: '/case-studies',
+  path: '/case-studies',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ExpertiseRoute = ExpertiseRouteImport.update({
@@ -24,39 +44,89 @@ const ExpertiseRoute = ExpertiseRouteImport.update({
   getParentRoute: () => rootRouteImport,
 } as any)
 const CaseStudiesIndexRoute = CaseStudiesIndexRouteImport.update({
-  id: '/case-studies/',
-  path: '/case-studies/',
-  getParentRoute: () => rootRouteImport,
+  id: '/',
+  path: '/',
+  getParentRoute: () => CaseStudiesRoute,
+} as any)
+const CaseStudiesAgioneRoute = CaseStudiesAgioneRouteImport.update({
+  id: '/agione',
+  path: '/agione',
+  getParentRoute: () => CaseStudiesRoute,
+} as any)
+const CaseStudiesRenuityRoute = CaseStudiesRenuityRouteImport.update({
+  id: '/renuity',
+  path: '/renuity',
+  getParentRoute: () => CaseStudiesRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/case-studies': typeof CaseStudiesRouteWithChildren
+  '/contact': typeof ContactRoute
   '/expertise': typeof ExpertiseRoute
+  '/case-studies/agione': typeof CaseStudiesAgioneRoute
+  '/case-studies/renuity': typeof CaseStudiesRenuityRoute
   '/case-studies/': typeof CaseStudiesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
   '/expertise': typeof ExpertiseRoute
+  '/case-studies/agione': typeof CaseStudiesAgioneRoute
+  '/case-studies/renuity': typeof CaseStudiesRenuityRoute
   '/case-studies': typeof CaseStudiesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/case-studies': typeof CaseStudiesRouteWithChildren
+  '/contact': typeof ContactRoute
   '/expertise': typeof ExpertiseRoute
+  '/case-studies/agione': typeof CaseStudiesAgioneRoute
+  '/case-studies/renuity': typeof CaseStudiesRenuityRoute
   '/case-studies/': typeof CaseStudiesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/expertise' | '/case-studies/'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/case-studies'
+    | '/contact'
+    | '/expertise'
+    | '/case-studies/agione'
+    | '/case-studies/renuity'
+    | '/case-studies/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/expertise' | '/case-studies'
-  id: '__root__' | '/' | '/expertise' | '/case-studies/'
+  to:
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/expertise'
+    | '/case-studies/agione'
+    | '/case-studies/renuity'
+    | '/case-studies'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/case-studies'
+    | '/contact'
+    | '/expertise'
+    | '/case-studies/agione'
+    | '/case-studies/renuity'
+    | '/case-studies/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  CaseStudiesRoute: typeof CaseStudiesRouteWithChildren
+  ContactRoute: typeof ContactRoute
   ExpertiseRoute: typeof ExpertiseRoute
-  CaseStudiesIndexRoute: typeof CaseStudiesIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -68,6 +138,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/case-studies': {
+      id: '/case-studies'
+      path: '/case-studies'
+      fullPath: '/case-studies'
+      preLoaderRoute: typeof CaseStudiesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/expertise': {
       id: '/expertise'
       path: '/expertise'
@@ -77,18 +168,50 @@ declare module '@tanstack/react-router' {
     }
     '/case-studies/': {
       id: '/case-studies/'
-      path: '/case-studies'
+      path: '/'
       fullPath: '/case-studies/'
       preLoaderRoute: typeof CaseStudiesIndexRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof CaseStudiesRoute
+    }
+    '/case-studies/agione': {
+      id: '/case-studies/agione'
+      path: '/agione'
+      fullPath: '/case-studies/agione'
+      preLoaderRoute: typeof CaseStudiesAgioneRouteImport
+      parentRoute: typeof CaseStudiesRoute
+    }
+    '/case-studies/renuity': {
+      id: '/case-studies/renuity'
+      path: '/renuity'
+      fullPath: '/case-studies/renuity'
+      preLoaderRoute: typeof CaseStudiesRenuityRouteImport
+      parentRoute: typeof CaseStudiesRoute
     }
   }
 }
 
+interface CaseStudiesRouteChildren {
+  CaseStudiesAgioneRoute: typeof CaseStudiesAgioneRoute
+  CaseStudiesRenuityRoute: typeof CaseStudiesRenuityRoute
+  CaseStudiesIndexRoute: typeof CaseStudiesIndexRoute
+}
+
+const CaseStudiesRouteChildren: CaseStudiesRouteChildren = {
+  CaseStudiesAgioneRoute: CaseStudiesAgioneRoute,
+  CaseStudiesRenuityRoute: CaseStudiesRenuityRoute,
+  CaseStudiesIndexRoute: CaseStudiesIndexRoute,
+}
+
+const CaseStudiesRouteWithChildren = CaseStudiesRoute._addFileChildren(
+  CaseStudiesRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  CaseStudiesRoute: CaseStudiesRouteWithChildren,
+  ContactRoute: ContactRoute,
   ExpertiseRoute: ExpertiseRoute,
-  CaseStudiesIndexRoute: CaseStudiesIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
