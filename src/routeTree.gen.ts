@@ -11,9 +11,12 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
+import { Route as BlogRouteImport } from './routes/blog'
 import { Route as CaseStudiesRouteImport } from './routes/case-studies'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as ExpertiseRouteImport } from './routes/expertise'
+import { Route as BlogIndexRouteImport } from './routes/blog.index'
+import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as CaseStudiesIndexRouteImport } from './routes/case-studies.index'
 import { Route as CaseStudiesAgioneRouteImport } from './routes/case-studies.agione'
 import { Route as CaseStudiesRenuityRouteImport } from './routes/case-studies.renuity'
@@ -26,6 +29,11 @@ const IndexRoute = IndexRouteImport.update({
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogRoute = BlogRouteImport.update({
+  id: '/blog',
+  path: '/blog',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CaseStudiesRoute = CaseStudiesRouteImport.update({
@@ -42,6 +50,16 @@ const ExpertiseRoute = ExpertiseRouteImport.update({
   id: '/expertise',
   path: '/expertise',
   getParentRoute: () => rootRouteImport,
+} as any)
+const BlogIndexRoute = BlogIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => BlogRoute,
+} as any)
+const BlogSlugRoute = BlogSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => BlogRoute,
 } as any)
 const CaseStudiesIndexRoute = CaseStudiesIndexRouteImport.update({
   id: '/',
@@ -62,11 +80,14 @@ const CaseStudiesRenuityRoute = CaseStudiesRenuityRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/blog': typeof BlogRouteWithChildren
   '/case-studies': typeof CaseStudiesRouteWithChildren
   '/contact': typeof ContactRoute
   '/expertise': typeof ExpertiseRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/case-studies/agione': typeof CaseStudiesAgioneRoute
   '/case-studies/renuity': typeof CaseStudiesRenuityRoute
+  '/blog/': typeof BlogIndexRoute
   '/case-studies/': typeof CaseStudiesIndexRoute
 }
 export interface FileRoutesByTo {
@@ -74,19 +95,24 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
   '/expertise': typeof ExpertiseRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/case-studies/agione': typeof CaseStudiesAgioneRoute
   '/case-studies/renuity': typeof CaseStudiesRenuityRoute
+  '/blog': typeof BlogIndexRoute
   '/case-studies': typeof CaseStudiesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/blog': typeof BlogRouteWithChildren
   '/case-studies': typeof CaseStudiesRouteWithChildren
   '/contact': typeof ContactRoute
   '/expertise': typeof ExpertiseRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/case-studies/agione': typeof CaseStudiesAgioneRoute
   '/case-studies/renuity': typeof CaseStudiesRenuityRoute
+  '/blog/': typeof BlogIndexRoute
   '/case-studies/': typeof CaseStudiesIndexRoute
 }
 export interface FileRouteTypes {
@@ -94,11 +120,14 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
+    | '/blog'
     | '/case-studies'
     | '/contact'
     | '/expertise'
+    | '/blog/$slug'
     | '/case-studies/agione'
     | '/case-studies/renuity'
+    | '/blog/'
     | '/case-studies/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -106,24 +135,30 @@ export interface FileRouteTypes {
     | '/about'
     | '/contact'
     | '/expertise'
+    | '/blog/$slug'
     | '/case-studies/agione'
     | '/case-studies/renuity'
+    | '/blog'
     | '/case-studies'
   id:
     | '__root__'
     | '/'
     | '/about'
+    | '/blog'
     | '/case-studies'
     | '/contact'
     | '/expertise'
+    | '/blog/$slug'
     | '/case-studies/agione'
     | '/case-studies/renuity'
+    | '/blog/'
     | '/case-studies/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  BlogRoute: typeof BlogRouteWithChildren
   CaseStudiesRoute: typeof CaseStudiesRouteWithChildren
   ContactRoute: typeof ContactRoute
   ExpertiseRoute: typeof ExpertiseRoute
@@ -143,6 +178,13 @@ declare module '@tanstack/react-router' {
       path: '/about'
       fullPath: '/about'
       preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog': {
+      id: '/blog'
+      path: '/blog'
+      fullPath: '/blog'
+      preLoaderRoute: typeof BlogRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/case-studies': {
@@ -165,6 +207,20 @@ declare module '@tanstack/react-router' {
       fullPath: '/expertise'
       preLoaderRoute: typeof ExpertiseRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/blog/': {
+      id: '/blog/'
+      path: '/'
+      fullPath: '/blog/'
+      preLoaderRoute: typeof BlogIndexRouteImport
+      parentRoute: typeof BlogRoute
+    }
+    '/blog/$slug': {
+      id: '/blog/$slug'
+      path: '/$slug'
+      fullPath: '/blog/$slug'
+      preLoaderRoute: typeof BlogSlugRouteImport
+      parentRoute: typeof BlogRoute
     }
     '/case-studies/': {
       id: '/case-studies/'
@@ -190,6 +246,18 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface BlogRouteChildren {
+  BlogSlugRoute: typeof BlogSlugRoute
+  BlogIndexRoute: typeof BlogIndexRoute
+}
+
+const BlogRouteChildren: BlogRouteChildren = {
+  BlogSlugRoute: BlogSlugRoute,
+  BlogIndexRoute: BlogIndexRoute,
+}
+
+const BlogRouteWithChildren = BlogRoute._addFileChildren(BlogRouteChildren)
+
 interface CaseStudiesRouteChildren {
   CaseStudiesAgioneRoute: typeof CaseStudiesAgioneRoute
   CaseStudiesRenuityRoute: typeof CaseStudiesRenuityRoute
@@ -209,6 +277,7 @@ const CaseStudiesRouteWithChildren = CaseStudiesRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  BlogRoute: BlogRouteWithChildren,
   CaseStudiesRoute: CaseStudiesRouteWithChildren,
   ContactRoute: ContactRoute,
   ExpertiseRoute: ExpertiseRoute,
