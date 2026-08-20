@@ -1,6 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Reveal } from "@/components/site/Reveal";
 import { ClientLogos } from "@/components/site/ClientLogos";
+import capSoftware from "@/assets/cap-software.jpg";
+import capSalesforce from "@/assets/cap-salesforce.jpg";
+import capArchitecture from "@/assets/cap-architecture.jpg";
+import capQuality from "@/assets/cap-quality.jpg";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -24,6 +28,7 @@ export const Route = createFileRoute("/about")({
 const CAPABILITIES = [
   {
     title: "Software Engineering",
+    image: capSoftware,
     items: [
       "Backend development (Node.js, Python, Java, .NET)",
       "Frontend development (React, Vue, Angular)",
@@ -33,6 +38,7 @@ const CAPABILITIES = [
   },
   {
     title: "Salesforce & Apex Engineering",
+    image: capSalesforce,
     items: [
       "Advanced Apex development",
       "Lightning Web Components (LWC)",
@@ -42,6 +48,7 @@ const CAPABILITIES = [
   },
   {
     title: "Architecture & Scalability",
+    image: capArchitecture,
     items: [
       "Clean Architecture and Domain-Driven Design (DDD)",
       "High-availability and fault-tolerant systems",
@@ -51,6 +58,7 @@ const CAPABILITIES = [
   },
   {
     title: "Quality & Delivery",
+    image: capQuality,
     items: [
       "Code reviews and technical leadership",
       "CI/CD pipelines",
@@ -129,7 +137,16 @@ function AboutPage() {
           <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {CAPABILITIES.map((c, i) => (
               <Reveal key={c.title} delay={i * 90}>
-                <div className="h-full rounded-2xl border border-light-foreground/10 bg-white/50 p-8">
+                <div className="h-full overflow-hidden rounded-2xl border border-light-foreground/10 bg-white/50">
+                  <img
+                    src={c.image}
+                    alt={c.title}
+                    loading="lazy"
+                    width={1280}
+                    height={860}
+                    className="h-40 w-full object-cover"
+                  />
+                  <div className="p-8">
                   <h3 className="font-display text-xl">{c.title}</h3>
                   <ul className="mt-5 space-y-3 text-sm text-light-foreground/70">
                     {c.items.map((item) => (
@@ -139,6 +156,7 @@ function AboutPage() {
                       </li>
                     ))}
                   </ul>
+                  </div>
                 </div>
               </Reveal>
             ))}
