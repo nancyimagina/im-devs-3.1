@@ -46,14 +46,8 @@ function RenuityPage() {
         </div>
       </section>
 
-      <div className="mx-auto max-w-7xl px-6 lg:px-10">
-        <img
-          src={hero}
-          alt="Renuity field operations"
-          width={1280}
-          height={860}
-          className="h-[420px] w-full rounded-2xl border border-border object-cover"
-        />
+      <div className="mx-auto max-w-7xl px-6 pt-6 lg:px-10">
+        <Carousel images={[hero, hero2, hero3]} alt="Renuity field operations" />
       </div>
 
       <section className="bg-deep py-24">
