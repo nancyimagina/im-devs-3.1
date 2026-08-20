@@ -1,6 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Reveal, CountUp } from "@/components/site/Reveal";
+import { Carousel } from "@/components/site/Carousel";
 import hero from "@/assets/case-renuity.jpg";
+import hero2 from "@/assets/case-renuity-2.jpg";
+import hero3 from "@/assets/case-renuity-3.jpg";
 import logo from "@/assets/logos/logo-renuity.png.asset.json";
 
 export const Route = createFileRoute("/case-studies/renuity")({
