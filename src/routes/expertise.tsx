@@ -1,5 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Reveal } from "@/components/site/Reveal";
+import imgRenuity from "@/assets/case-renuity.jpg";
+import imgAgione from "@/assets/case-agione.jpg";
+import imgSalesforce from "@/assets/cap-salesforce.jpg";
 
 export const Route = createFileRoute("/expertise")({
   head: () => ({
@@ -24,6 +27,7 @@ export const Route = createFileRoute("/expertise")({
 const AREAS = [
   {
     title: "Home Services & Field Operations",
+    image: imgRenuity,
     intro:
       "We build and extend software for companies managing distributed field teams and complex operational workflows.",
     focus: [
@@ -38,6 +42,7 @@ const AREAS = [
   },
   {
     title: "Logistics & Mission-Critical Operations",
+    image: imgAgione,
     intro:
       "We build reliable software for complex operations where coordination, visibility and responsiveness matter.",
     focus: [
@@ -52,6 +57,7 @@ const AREAS = [
   },
   {
     title: "Enterprise Salesforce",
+    image: imgSalesforce,
     intro:
       "We provide engineering capacity for Salesforce-heavy organizations and teams that need specialized development support.",
     focus: [
@@ -87,6 +93,16 @@ function ExpertisePage() {
             <Reveal key={area.title} delay={i * 80}>
               <article className="grid gap-10 border-t border-border py-14 lg:grid-cols-[0.9fr_1.1fr]">
                 <div>
+                  <div className="mb-8 overflow-hidden rounded-2xl border border-border">
+                    <img
+                      src={area.image}
+                      alt={area.title}
+                      loading="lazy"
+                      width={1280}
+                      height={860}
+                      className="h-56 w-full object-cover"
+                    />
+                  </div>
                   <h2 className="font-display text-2xl leading-snug sm:text-3xl">{area.title}</h2>
                   {area.proof && (
                     <p className="mt-5 text-sm text-accent">{area.proof}</p>
