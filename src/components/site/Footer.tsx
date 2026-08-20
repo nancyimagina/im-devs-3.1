@@ -21,6 +21,7 @@ const LINKS = [
   { label: "Home", to: "/" },
   { label: "Expertise", to: "/expertise" },
   { label: "Case Studies", to: "/case-studies" },
+  { label: "Blog", to: "/blog" },
   { label: "About", to: "/about" },
   { label: "Contact", to: "/contact" },
 ] as const;
@@ -34,6 +35,20 @@ export function Footer() {
           <p className="mt-5 text-sm text-muted-foreground">
             Nearshore engineering for U.S. companies.
           </p>
+          <div className="mt-5 grid gap-2 text-sm">
+            <a
+              href="mailto:info@imaginadevs.com"
+              className="text-foreground/70 transition-colors hover:text-accent"
+            >
+              info@imaginadevs.com
+            </a>
+            <a
+              href="tel:+13212522392"
+              className="text-foreground/70 transition-colors hover:text-accent"
+            >
+              +1 321 252 2392
+            </a>
+          </div>
           <div className="mt-6 flex gap-3">
             {SOCIALS.map(({ label, href, Icon }) => (
               <a

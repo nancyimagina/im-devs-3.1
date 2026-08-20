@@ -51,7 +51,7 @@ function CaseStudiesPage() {
         </div>
       </section>
 
-      <section className="bg-deep pb-28">
+      <section className="bg-deep pb-28 pt-12">
         <div className="mx-auto grid max-w-7xl gap-10 px-6 lg:grid-cols-2 lg:px-10">
           {CASES.map((c, i) => (
             <Reveal key={c.name} delay={i * 110}>

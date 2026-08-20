@@ -47,6 +47,24 @@ function ContactPage() {
               </li>
             ))}
           </ul>
+
+          <div className="mt-10 border-t border-border pt-8">
+            <p className="text-xs uppercase tracking-[0.28em] text-accent">Direct contact</p>
+            <div className="mt-5 grid gap-3">
+              <a
+                href="mailto:info@imaginadevs.com"
+                className="font-display text-xl transition-colors hover:text-accent"
+              >
+                info@imaginadevs.com
+              </a>
+              <a
+                href="tel:+13212522392"
+                className="font-display text-xl transition-colors hover:text-accent"
+              >
+                +1 321 252 2392
+              </a>
+            </div>
+          </div>
         </div>
         <ContactForm />
       </div>

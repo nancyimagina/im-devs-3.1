@@ -3,6 +3,8 @@ import { Boxes, Cloud, Code2, Layers, Radar, Users } from "lucide-react";
 import { Hero } from "@/components/site/Hero";
 import { ClientLogos } from "@/components/site/ClientLogos";
 import { Reveal, CountUp } from "@/components/site/Reveal";
+import { Testimonials } from "@/components/site/Testimonials";
+import { BLOG_POSTS } from "@/data/blog";
 import caseRenuity from "@/assets/case-renuity.jpg";
 import caseAgione from "@/assets/case-agione.jpg";
 
@@ -244,6 +246,53 @@ function Home() {
               </Reveal>
             ))}
           </div>
+        </div>
+      </section>
+
+      <Testimonials />
+
+      {/* Blog — dark */}
+      <section id="blog" className="bg-deep py-28">
+        <div className="mx-auto max-w-7xl px-6 lg:px-10">
+          <Reveal>
+            <p className="text-xs uppercase tracking-[0.28em] text-accent">Blog</p>
+            <h2 className="mt-6 max-w-2xl font-display text-3xl leading-tight sm:text-5xl">
+              Engineering insights
+            </h2>
+          </Reveal>
+
+          <div className="mt-16 grid gap-10 lg:grid-cols-3">
+            {BLOG_POSTS.map((p, i) => (
+              <Reveal key={p.slug} delay={i * 110}>
+                <Link to="/blog/$slug" params={{ slug: p.slug }} className="group block h-full">
+                  <div className="overflow-hidden rounded-2xl border border-border">
+                    <img
+                      src={p.image}
+                      alt={p.title}
+                      loading="lazy"
+                      width={1280}
+                      height={860}
+                      className="h-52 w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                  </div>
+                  <p className="mt-6 text-xs uppercase tracking-[0.22em] text-accent">
+                    {p.category}
+                  </p>
+                  <h3 className="mt-3 font-display text-xl leading-snug">{p.title}</h3>
+                  <p className="mt-3 text-sm text-foreground/65">{p.excerpt}</p>
+                </Link>
+              </Reveal>
+            ))}
+          </div>
+
+          <Reveal delay={200}>
+            <Link
+              to="/blog"
+              className="mt-12 inline-flex text-sm font-medium text-accent transition-transform duration-300 hover:translate-x-1"
+            >
+              Read the blog →
+            </Link>
+          </Reveal>
         </div>
       </section>
 
