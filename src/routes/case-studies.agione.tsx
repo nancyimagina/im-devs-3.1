@@ -1,6 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Reveal, CountUp } from "@/components/site/Reveal";
+import { Carousel } from "@/components/site/Carousel";
 import hero from "@/assets/case-agione.jpg";
+import hero2 from "@/assets/case-agione-2.jpg";
+import hero3 from "@/assets/case-agione-3.jpg";
 import logo from "@/assets/logos/logo-agione.png.asset.json";
 
 export const Route = createFileRoute("/case-studies/agione")({
@@ -45,14 +48,8 @@ function AgiOnePage() {
         </div>
       </section>
 
-      <div className="mx-auto max-w-7xl px-6 lg:px-10">
-        <img
-          src={hero}
-          alt="Airport ramp operations"
-          width={1280}
-          height={860}
-          className="h-[420px] w-full rounded-2xl border border-border object-cover"
-        />
+      <div className="mx-auto max-w-7xl px-6 pt-6 lg:px-10">
+        <Carousel images={[hero, hero2, hero3]} alt="AgiOne airport operations" />
       </div>
 
       <section className="bg-deep py-24">
