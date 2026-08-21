@@ -276,8 +276,6 @@ export const ES: Record<string, string> = {
   "Let's build what's next.": "Construyamos lo que sigue.",
 
   // ---------- Contact ----------
-  "Tell us what you're building, what you're trying to solve, or where your team needs support.":
-    "Cuéntanos qué estás construyendo, qué quieres resolver o dónde tu equipo necesita apoyo.",
   "Senior engineers integrated with your team": "Ingenieros senior integrados a tu equipo",
   "U.S. time zone aligned collaboration": "Colaboración alineada al huso horario de EE. UU.",
   "Flexible scaling as your needs change":
