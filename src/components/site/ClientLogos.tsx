@@ -16,12 +16,15 @@ const LOGOS = [
   { src: amazonia.url, alt: "Amazonía" },
 ];
 
+import { useI18n } from "@/i18n/LanguageProvider";
+
 export function ClientLogos() {
+  const { t } = useI18n();
   return (
     <section className="border-y border-border bg-deep py-16">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <p className="text-center text-xs uppercase tracking-[0.28em] text-muted-foreground">
-          Trusted by teams building complex operations
+          {t("Trusted by teams building complex operations")}
         </p>
         <div className="mt-10 grid grid-cols-2 items-center gap-x-10 gap-y-10 sm:grid-cols-4 lg:grid-cols-7">
           {LOGOS.map((logo) => (
