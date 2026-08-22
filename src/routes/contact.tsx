@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ContactForm } from "@/components/site/ContactForm";
+import { useI18n } from "@/i18n/LanguageProvider";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -27,29 +28,31 @@ const POINTS = [
 ];
 
 function ContactPage() {
+  const { t } = useI18n();
   return (
     <section className="surface-noise min-h-screen bg-deep-gradient px-6 pb-28 pt-40 lg:px-10">
       <div className="mx-auto grid max-w-7xl gap-14 lg:grid-cols-2 lg:gap-20">
         <div>
-          <p className="text-xs uppercase tracking-[0.28em] text-accent">Contact</p>
+          <p className="text-xs uppercase tracking-[0.28em] text-accent">{t("Contact")}</p>
           <h1 className="mt-6 font-display text-4xl leading-[1.08] sm:text-6xl">
-            Let&apos;s build what&apos;s next.
+            {t("Let's build what's next.")}
           </h1>
           <p className="mt-6 max-w-md text-foreground/65">
-            Tell us what you&apos;re building, what you&apos;re trying to solve, or where your team
-            needs support.
+            {t(
+              "Tell us what you're building, what you're trying to solve, or where your team needs support.",
+            )}
           </p>
           <ul className="mt-10 grid gap-4">
             {POINTS.map((p) => (
               <li key={p} className="flex items-center gap-3 text-sm text-foreground/70">
                 <span className="size-1.5 rounded-full bg-accent" />
-                {p}
+                {t(p)}
               </li>
             ))}
           </ul>
 
           <div className="mt-10 border-t border-border pt-8">
-            <p className="text-xs uppercase tracking-[0.28em] text-accent">Direct contact</p>
+            <p className="text-xs uppercase tracking-[0.28em] text-accent">{t("Direct contact")}</p>
             <div className="mt-5 grid gap-3">
               <a
                 href="mailto:info@imaginadevs.com"

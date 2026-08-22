@@ -1,6 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { Reveal } from "@/components/site/Reveal";
 import { BLOG_POSTS, getPost } from "@/data/blog";
+import { useI18n } from "@/i18n/LanguageProvider";
 
 export const Route = createFileRoute("/blog/$slug")({
   loader: ({ params }) => {
@@ -31,12 +32,13 @@ export const Route = createFileRoute("/blog/$slug")({
 });
 
 function PostNotFound() {
+  const { t } = useI18n();
   return (
     <section className="surface-noise min-h-[70vh] bg-deep-gradient px-6 pt-40 lg:px-10">
       <div className="mx-auto max-w-7xl">
-        <h1 className="font-display text-4xl">Article not found</h1>
+        <h1 className="font-display text-4xl">{t("Article not found")}</h1>
         <Link to="/blog" className="mt-6 inline-flex text-sm text-accent">
-          ← Back to blog
+          {t("← Back to blog")}
         </Link>
       </div>
     </section>
@@ -46,18 +48,19 @@ function PostNotFound() {
 function BlogPostPage() {
   const { post } = Route.useLoaderData();
   const others = BLOG_POSTS.filter((p) => p.slug !== post.slug);
+  const { t } = useI18n();
 
   return (
     <>
       <section className="surface-noise bg-deep-gradient px-6 pb-14 pt-40 lg:px-10">
         <div className="mx-auto max-w-3xl">
           <Link to="/blog" className="text-sm text-foreground/60 transition-colors hover:text-accent">
-            ← Blog
+            {t("← Blog")}
           </Link>
-          <p className="mt-8 text-xs uppercase tracking-[0.28em] text-accent">{post.category}</p>
-          <h1 className="mt-6 font-display text-3xl leading-[1.12] sm:text-5xl">{post.title}</h1>
+          <p className="mt-8 text-xs uppercase tracking-[0.28em] text-accent">{t(post.category)}</p>
+          <h1 className="mt-6 font-display text-3xl leading-[1.12] sm:text-5xl">{t(post.title)}</h1>
           <p className="mt-5 text-sm text-foreground/50">
-            {post.date} · {post.readTime}
+            {t(post.date)} · {t(post.readTime)}
           </p>
         </div>
       </section>
@@ -65,7 +68,7 @@ function BlogPostPage() {
       <div className="mx-auto max-w-5xl px-6 lg:px-10">
         <img
           src={post.image}
-          alt={post.title}
+          alt={t(post.title)}
           width={1280}
           height={860}
           className="h-[300px] w-full rounded-2xl border border-border object-cover sm:h-[420px]"
@@ -74,20 +77,20 @@ function BlogPostPage() {
 
       <article className="bg-deep py-20">
         <div className="mx-auto max-w-3xl px-6 lg:px-10">
-          <p className="text-lg text-foreground/75">{post.excerpt}</p>
+          <p className="text-lg text-foreground/75">{t(post.excerpt)}</p>
           {post.sections.map((s, i) => (
             <Reveal key={s.heading} delay={i * 60}>
-              <h2 className="mt-14 font-display text-2xl">{s.heading}</h2>
+              <h2 className="mt-14 font-display text-2xl">{t(s.heading)}</h2>
               {s.paragraphs.map((p) => (
                 <p key={p} className="mt-5 text-foreground/70">
-                  {p}
+                  {t(p)}
                 </p>
               ))}
             </Reveal>
           ))}
 
           <div className="mt-16 border-t border-border pt-10">
-            <h2 className="font-display text-xl">More articles</h2>
+            <h2 className="font-display text-xl">{t("More articles")}</h2>
             <div className="mt-6 grid gap-4">
               {others.map((p) => (
                 <Link
@@ -96,7 +99,7 @@ function BlogPostPage() {
                   params={{ slug: p.slug }}
                   className="text-foreground/70 transition-colors hover:text-accent"
                 >
-                  {p.title} →
+                  {t(p.title)} →
                 </Link>
               ))}
             </div>
