@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Reveal } from "@/components/site/Reveal";
+import { useI18n } from "@/i18n/LanguageProvider";
 import { ClientLogos } from "@/components/site/ClientLogos";
 import capSoftware from "@/assets/cap-software.jpg";
 import capSalesforce from "@/assets/cap-salesforce.jpg";
@@ -102,25 +103,25 @@ const HOW_WE_WORK = [
 ];
 
 function AboutPage() {
+  const { t } = useI18n();
   return (
     <>
       <section className="surface-noise bg-deep-gradient px-6 pb-24 pt-40 lg:px-10">
         <div className="mx-auto max-w-7xl">
-          <p className="text-xs uppercase tracking-[0.28em] text-accent">About</p>
+          <p className="text-xs uppercase tracking-[0.28em] text-accent">{t("About")}</p>
           <h1 className="mt-6 max-w-4xl font-display text-4xl leading-[1.08] text-balance-tight sm:text-6xl">
-            Who We Are
+            {t("Who We Are")}
           </h1>
           <div className="mt-10 grid max-w-4xl gap-6 text-foreground/70 sm:grid-cols-2">
             <p>
-              Imagina Devs is a nearshore software development partner specialized in building,
-              scaling, and operating mission-critical systems for U.S. companies. We integrate
-              senior engineering talent directly into your teams, aligned to U.S. time zones and
-              enterprise standards.
+              {t(
+                "Imagina Devs is a nearshore software development partner specialized in building, scaling, and operating mission-critical systems for U.S. companies. We integrate senior engineering talent directly into your teams, aligned to U.S. time zones and enterprise standards.",
+              )}
             </p>
             <p>
-              We focus on long-term partnerships, not short-term outsourcing. Our teams work as an
-              extension of your engineering and product organization, with clear communication,
-              accountability and flexible scaling.
+              {t(
+                "We focus on long-term partnerships, not short-term outsourcing. Our teams work as an extension of your engineering and product organization, with clear communication, accountability and flexible scaling.",
+              )}
             </p>
           </div>
         </div>
@@ -130,7 +131,7 @@ function AboutPage() {
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
           <Reveal>
             <h2 className="max-w-2xl font-display text-3xl leading-tight text-balance-tight sm:text-5xl">
-              Core Technical Capabilities
+              {t("Core Technical Capabilities")}
             </h2>
           </Reveal>
 
@@ -140,19 +141,19 @@ function AboutPage() {
                 <div className="h-full overflow-hidden rounded-2xl border border-light-foreground/10 bg-white/50">
                   <img
                     src={c.image}
-                    alt={c.title}
+                    alt={t(c.title)}
                     loading="lazy"
                     width={1280}
                     height={860}
                     className="h-40 w-full object-cover"
                   />
                   <div className="p-8">
-                  <h3 className="font-display text-xl">{c.title}</h3>
+                  <h3 className="font-display text-xl">{t(c.title)}</h3>
                   <ul className="mt-5 space-y-3 text-sm text-light-foreground/70">
                     {c.items.map((item) => (
                       <li key={item} className="flex gap-3">
                         <span className="text-green-ink">●</span>
-                        <span>{item}</span>
+                        <span>{t(item)}</span>
                       </li>
                     ))}
                   </ul>
@@ -168,24 +169,24 @@ function AboutPage() {
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
           <div className="grid gap-16 lg:grid-cols-2">
             <Reveal>
-              <h2 className="font-display text-3xl leading-tight sm:text-4xl">Delivery Model</h2>
+              <h2 className="font-display text-3xl leading-tight sm:text-4xl">{t("Delivery Model")}</h2>
               <ul className="mt-8 space-y-4 text-foreground/70">
                 {DELIVERY.map((item) => (
                   <li key={item} className="flex gap-3">
                     <span className="text-accent">●</span>
-                    <span>{item}</span>
+                    <span>{t(item)}</span>
                   </li>
                 ))}
               </ul>
             </Reveal>
 
             <Reveal delay={100}>
-              <h2 className="font-display text-3xl leading-tight sm:text-4xl">Why Imagina Devs</h2>
+              <h2 className="font-display text-3xl leading-tight sm:text-4xl">{t("Why Imagina Devs")}</h2>
               <ul className="mt-8 space-y-4 text-foreground/70">
                 {WHY.map((item) => (
                   <li key={item} className="flex gap-3">
                     <span className="text-accent">●</span>
-                    <span>{item}</span>
+                    <span>{t(item)}</span>
                   </li>
                 ))}
               </ul>
@@ -198,30 +199,33 @@ function AboutPage() {
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
           <Reveal>
             <h2 className="max-w-2xl font-display text-3xl leading-tight text-balance-tight sm:text-5xl">
-              What We Do
+              {t("What We Do")}
             </h2>
             <p className="mt-5 max-w-2xl text-light-foreground/70">
-              Imagina Devs helps U.S. companies design and build reliable software through
-              high-quality nearshore development teams.
+              {t(
+                "Imagina Devs helps U.S. companies design and build reliable software through high-quality nearshore development teams.",
+              )}
             </p>
           </Reveal>
 
           <div className="mt-16 grid gap-6 lg:grid-cols-3">
             <Reveal delay={90}>
               <div className="h-full rounded-2xl border border-light-foreground/10 bg-white/50 p-8">
-                <h3 className="font-display text-xl">How We Create Value</h3>
+                <h3 className="font-display text-xl">{t("How We Create Value")}</h3>
                 <ul className="mt-5 space-y-3 text-sm text-light-foreground/70">
                   <li className="flex gap-3">
                     <span className="text-green-ink">●</span>
-                    <span>We extend your team with experienced developers</span>
+                    <span>{t("We extend your team with experienced developers")}</span>
                   </li>
                   <li className="flex gap-3">
                     <span className="text-green-ink">●</span>
-                    <span>We accelerate delivery without increasing internal overhead</span>
+                    <span>{t("We accelerate delivery without increasing internal overhead")}</span>
                   </li>
                   <li className="flex gap-3">
                     <span className="text-green-ink">●</span>
-                    <span>We reduce risk by providing stable, long-term engineering capacity</span>
+                    <span>
+                      {t("We reduce risk by providing stable, long-term engineering capacity")}
+                    </span>
                   </li>
                 </ul>
               </div>
@@ -229,12 +233,12 @@ function AboutPage() {
 
             <Reveal delay={180}>
               <div className="h-full rounded-2xl border border-light-foreground/10 bg-white/50 p-8">
-                <h3 className="font-display text-xl">Our Services</h3>
+                <h3 className="font-display text-xl">{t("Our Services")}</h3>
                 <ul className="mt-5 space-y-3 text-sm text-light-foreground/70">
                   {SERVICES.map((item) => (
                     <li key={item} className="flex gap-3">
                       <span className="text-green-ink">●</span>
-                      <span>{item}</span>
+                      <span>{t(item)}</span>
                     </li>
                   ))}
                 </ul>
@@ -243,12 +247,12 @@ function AboutPage() {
 
             <Reveal delay={270}>
               <div className="h-full rounded-2xl border border-light-foreground/10 bg-white/50 p-8">
-                <h3 className="font-display text-xl">How We Work</h3>
+                <h3 className="font-display text-xl">{t("How We Work")}</h3>
                 <ul className="mt-5 space-y-3 text-sm text-light-foreground/70">
                   {HOW_WE_WORK.map((item) => (
                     <li key={item} className="flex gap-3">
                       <span className="text-green-ink">●</span>
-                      <span>{item}</span>
+                      <span>{t(item)}</span>
                     </li>
                   ))}
                 </ul>
@@ -262,7 +266,7 @@ function AboutPage() {
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
           <Reveal>
             <h2 className="max-w-2xl font-display text-3xl leading-tight text-balance-tight sm:text-5xl">
-              Industries We Support
+              {t("Industries We Support")}
             </h2>
           </Reveal>
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -270,7 +274,7 @@ function AboutPage() {
               <Reveal key={item} delay={i * 90}>
                 <div className="rounded-2xl border border-border bg-surface/40 p-6">
                   <span className="text-accent">●</span>
-                  <p className="mt-3 font-display text-lg">{item}</p>
+                  <p className="mt-3 font-display text-lg">{t(item)}</p>
                 </div>
               </Reveal>
             ))}
@@ -282,12 +286,12 @@ function AboutPage() {
 
       <section className="surface-noise bg-deep-gradient py-24">
         <div className="mx-auto max-w-3xl px-6 text-center">
-          <h2 className="font-display text-3xl sm:text-4xl">Let&apos;s build what&apos;s next.</h2>
+          <h2 className="font-display text-3xl sm:text-4xl">{t("Let's build what's next.")}</h2>
           <Link
             to="/contact"
             className="mt-8 inline-flex rounded-full bg-accent px-6 py-3 text-sm font-medium text-accent-foreground transition-transform duration-300 hover:-translate-y-0.5"
           >
-            Talk to us →
+            {t("Talk to us →")}
           </Link>
         </div>
       </section>
