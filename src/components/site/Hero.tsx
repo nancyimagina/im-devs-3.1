@@ -1,17 +1,19 @@
 import { lazy, Suspense, useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { ArrowLeft, ArrowRight } from "lucide-react";
+import { useI18n } from "@/i18n/LanguageProvider";
 
 const ParticleGlobe = lazy(() => import("./ParticleGlobe"));
 
 const SLIDES = [
   { label: "Salesforce Experts", to: "/expertise", cta: "Talk to our experts →" },
   { label: "Staff Augmentation", to: "/contact", cta: "Build your team →" },
-];
+] as const;
 
 export function Hero() {
   const [index, setIndex] = useState(0);
   const [mounted, setMounted] = useState(false);
+  const { t } = useI18n();
 
   useEffect(() => setMounted(true), []);
 
@@ -39,7 +41,7 @@ export function Hero() {
         <div className="max-w-4xl animate-rise">
           <h1 className="font-display text-5xl leading-[1.02] text-balance-tight sm:text-7xl lg:text-8xl">
             <span key={active.label} className="animate-rise block">
-              {active.label}
+              {t(active.label)}
             </span>
           </h1>
 
@@ -48,8 +50,10 @@ export function Hero() {
             className="animate-rise mt-8 max-w-xl text-lg text-foreground/70 sm:text-xl"
           >
             {index === 0
-              ? "Specialized Salesforce engineering to extend your platform capabilities."
-              : "Experienced engineers who work directly with your team and scale with your needs."}
+              ? t("Specialized Salesforce engineering to extend your platform capabilities.")
+              : t(
+                  "Experienced engineers who work directly with your team and scale with your needs.",
+                )}
           </p>
 
           <div className="mt-10 flex flex-wrap items-center gap-4">
@@ -57,20 +61,20 @@ export function Hero() {
               to={active.to}
               className="rounded-full bg-accent px-6 py-3 text-sm font-medium text-accent-foreground transition-transform duration-300 hover:-translate-y-0.5"
             >
-              {active.cta}
+              {t(active.cta)}
             </Link>
             <Link
               to="/case-studies"
               className="rounded-full border border-border px-6 py-3 text-sm text-foreground/80 transition-colors hover:border-accent hover:text-accent"
             >
-              See our work →
+              {t("See our work →")}
             </Link>
           </div>
 
           <div className="mt-12 flex items-center gap-3">
             <button
               type="button"
-              aria-label="Previous service"
+              aria-label={t("Previous service")}
               onClick={prev}
               className="inline-flex size-10 items-center justify-center rounded-full border border-border transition-colors hover:border-accent hover:text-accent"
             >
@@ -78,7 +82,7 @@ export function Hero() {
             </button>
             <button
               type="button"
-              aria-label="Next service"
+              aria-label={t("Next service")}
               onClick={next}
               className="inline-flex size-10 items-center justify-center rounded-full border border-border transition-colors hover:border-accent hover:text-accent"
             >
