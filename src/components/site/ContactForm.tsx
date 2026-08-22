@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { toast } from "sonner";
+import { useI18n } from "@/i18n/LanguageProvider";
 
 const CHIPS = ["Staff Augmentation", "Salesforce", "Custom Software", "Other"];
 
 export function ContactForm() {
   const [chips, setChips] = useState<string[]>([]);
+  const { t } = useI18n();
 
   const toggle = (chip: string) =>
     setChips((prev) => (prev.includes(chip) ? prev.filter((c) => c !== chip) : [...prev, chip]));
@@ -13,23 +15,23 @@ export function ContactForm() {
     <form
       onSubmit={(e) => {
         e.preventDefault();
-        toast.success("Thanks — we'll get back to you shortly.");
+        toast.success(t("Thanks — we'll get back to you shortly."));
         (e.target as HTMLFormElement).reset();
         setChips([]);
       }}
       className="rounded-2xl border border-border bg-surface/60 p-7 backdrop-blur-md sm:p-9"
     >
       <div className="grid gap-5 sm:grid-cols-2">
-        <Field label="Name" name="name" />
-        <Field label="Work Email" name="email" type="email" />
+        <Field label={t("Name")} name="name" />
+        <Field label={t("Work Email")} name="email" type="email" />
         <div className="sm:col-span-2">
-          <Field label="Company" name="company" />
+          <Field label={t("Company")} name="company" />
         </div>
       </div>
 
       <div className="mt-7">
         <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
-          What can we help with?
+          {t("What can we help with?")}
         </span>
         <div className="mt-4 flex flex-wrap gap-2">
           {CHIPS.map((chip) => {
@@ -45,7 +47,7 @@ export function ContactForm() {
                     : "border-border text-foreground/70 hover:border-accent hover:text-accent"
                 }`}
               >
-                {chip}
+                {t(chip)}
               </button>
             );
           })}
@@ -53,15 +55,18 @@ export function ContactForm() {
       </div>
 
       <div className="mt-7">
-        <label htmlFor="message" className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
-          Tell us more
+        <label
+          htmlFor="message"
+          className="text-xs uppercase tracking-[0.2em] text-muted-foreground"
+        >
+          {t("Tell us more")}
         </label>
         <textarea
           id="message"
           name="message"
           rows={4}
           className="mt-3 w-full rounded-xl border border-input bg-deep/40 px-4 py-3 text-sm text-foreground outline-none transition-colors placeholder:text-muted-foreground focus:border-accent"
-          placeholder="What are you building?"
+          placeholder={t("What are you building?")}
         />
       </div>
 
@@ -69,7 +74,7 @@ export function ContactForm() {
         type="submit"
         className="mt-8 w-full rounded-full bg-accent px-6 py-3 text-sm font-medium text-accent-foreground transition-transform duration-300 hover:-translate-y-0.5 sm:w-auto"
       >
-        Start a conversation →
+        {t("Start a conversation →")}
       </button>
     </form>
   );
