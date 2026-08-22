@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useI18n } from "@/i18n/LanguageProvider";
 import logoLight from "@/assets/logos/logo-im-devs-light.png.asset.json";
 
 const NAV = [
@@ -13,10 +14,47 @@ const NAV = [
   { label: "Contact", to: "/contact" },
 ] as const;
 
+function LangSwitch({ className }: { className?: string }) {
+  const { lang, setLang } = useI18n();
+  return (
+    <div
+      className={cn(
+        "inline-flex items-center gap-1 rounded-full border border-border px-3 py-1.5 text-xs",
+        className,
+      )}
+    >
+      <button
+        type="button"
+        onClick={() => setLang("en")}
+        aria-label="English"
+        className={cn(
+          "transition-colors",
+          lang === "en" ? "text-accent" : "text-foreground/50 hover:text-foreground",
+        )}
+      >
+        EN
+      </button>
+      <span className="text-foreground/25">|</span>
+      <button
+        type="button"
+        onClick={() => setLang("es")}
+        aria-label="Español"
+        className={cn(
+          "transition-colors",
+          lang === "es" ? "text-accent" : "text-foreground/50 hover:text-foreground",
+        )}
+      >
+        ES
+      </button>
+    </div>
+  );
+}
+
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const { t } = useI18n();
 
   useEffect(() => setOpen(false), [pathname]);
 
@@ -35,7 +73,7 @@ export function Header() {
       )}
     >
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 lg:px-10">
-        <Link to="/" className="flex items-center" aria-label="Imagina Devs home">
+        <Link to="/" className="flex items-center" aria-label={t("Imagina Devs home")}>
           <img src={logoLight.url} alt="Imagina Devs" className="h-8 w-auto" />
         </Link>
 
@@ -51,7 +89,7 @@ export function Header() {
                   active && "text-foreground",
                 )}
               >
-                {item.label}
+                {t(item.label)}
                 <span
                   className={cn(
                     "absolute -bottom-1 left-0 h-px bg-accent transition-all duration-300",
@@ -64,15 +102,16 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-3">
+          <LangSwitch className="hidden sm:inline-flex" />
           <Link
             to="/contact"
             className="hidden rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-accent-foreground transition-transform duration-300 hover:-translate-y-0.5 md:inline-flex"
           >
-            Talk to us →
+            {t("Talk to us →")}
           </Link>
           <button
             type="button"
-            aria-label="Toggle menu"
+            aria-label={t("Toggle menu")}
             onClick={() => setOpen((v) => !v)}
             className="inline-flex size-10 items-center justify-center rounded-full border border-border text-foreground md:hidden"
           >
@@ -89,15 +128,18 @@ export function Header() {
               to={item.to}
               className="block border-b border-border/60 py-4 text-base text-foreground/80"
             >
-              {item.label}
+              {t(item.label)}
             </Link>
           ))}
-          <Link
-            to="/contact"
-            className="mt-5 inline-flex rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-accent-foreground"
-          >
-            Talk to us →
-          </Link>
+          <div className="mt-5 flex items-center gap-3">
+            <Link
+              to="/contact"
+              className="inline-flex rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-accent-foreground"
+            >
+              {t("Talk to us →")}
+            </Link>
+            <LangSwitch />
+          </div>
         </div>
       )}
     </header>
