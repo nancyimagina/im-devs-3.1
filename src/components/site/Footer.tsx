@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Facebook, Instagram, Linkedin } from "lucide-react";
+import { useI18n } from "@/i18n/LanguageProvider";
 import logoLight from "@/assets/logos/logo-im-devs-light.png.asset.json";
 
 function TikTok({ className }: { className?: string }) {
@@ -27,13 +28,15 @@ const LINKS = [
 ] as const;
 
 export function Footer() {
+  const { t } = useI18n();
+
   return (
     <footer className="border-t border-border bg-deep">
       <div className="mx-auto flex max-w-7xl flex-col gap-12 px-6 py-16 lg:flex-row lg:items-start lg:justify-between lg:px-10">
         <div className="max-w-sm">
           <img src={logoLight.url} alt="Imagina Devs" className="h-8 w-auto" />
           <p className="mt-5 text-sm text-muted-foreground">
-            Nearshore engineering for U.S. companies.
+            {t("Nearshore engineering for U.S. companies.")}
           </p>
           <div className="mt-5 grid gap-2 text-sm">
             <a
@@ -72,26 +75,28 @@ export function Footer() {
               to={l.to}
               className="text-sm text-foreground/70 transition-colors hover:text-accent"
             >
-              {l.label}
+              {t(l.label)}
             </Link>
           ))}
         </nav>
 
         <div className="max-w-xs">
-          <p className="font-display text-lg">Ready to scale your engineering team?</p>
+          <p className="font-display text-lg">{t("Ready to scale your engineering team?")}</p>
           <Link
             to="/contact"
             className="mt-5 inline-flex rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-accent-foreground transition-transform duration-300 hover:-translate-y-0.5"
           >
-            Let&apos;s talk →
+            {t("Let's talk →")}
           </Link>
         </div>
       </div>
 
       <div className="border-t border-border">
         <div className="mx-auto flex max-w-7xl flex-col gap-2 px-6 py-6 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between lg:px-10">
-          <span>© {new Date().getFullYear()} Imagina Devs. All rights reserved.</span>
-          <span>Senior engineering talent, aligned with U.S. time zones.</span>
+          <span>
+            © {new Date().getFullYear()} Imagina Devs. {t("All rights reserved.")}
+          </span>
+          <span>{t("Senior engineering talent, aligned with U.S. time zones.")}</span>
         </div>
       </div>
     </footer>

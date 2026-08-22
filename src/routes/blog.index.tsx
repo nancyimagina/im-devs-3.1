@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Reveal } from "@/components/site/Reveal";
 import { BLOG_POSTS } from "@/data/blog";
+import { useI18n } from "@/i18n/LanguageProvider";
 
 export const Route = createFileRoute("/blog/")({
   head: () => ({
@@ -24,16 +25,17 @@ export const Route = createFileRoute("/blog/")({
 });
 
 function BlogIndex() {
+  const { t } = useI18n();
   return (
     <>
       <section className="surface-noise bg-deep-gradient px-6 pb-20 pt-40 lg:px-10">
         <div className="mx-auto max-w-7xl">
-          <p className="text-xs uppercase tracking-[0.28em] text-accent">Blog</p>
+          <p className="text-xs uppercase tracking-[0.28em] text-accent">{t("Blog")}</p>
           <h1 className="mt-6 max-w-3xl font-display text-4xl leading-[1.08] sm:text-6xl">
-            Engineering insights.
+            {t("Engineering insights.")}
           </h1>
           <p className="mt-6 max-w-xl text-foreground/65">
-            Notes from building and scaling software with nearshore engineering teams.
+            {t("Notes from building and scaling software with nearshore engineering teams.")}
           </p>
         </div>
       </section>
@@ -46,18 +48,18 @@ function BlogIndex() {
                 <div className="overflow-hidden rounded-2xl border border-border">
                   <img
                     src={p.image}
-                    alt={p.title}
+                    alt={t(p.title)}
                     loading="lazy"
                     width={1280}
                     height={860}
                     className="h-56 w-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                 </div>
-                <p className="mt-6 text-xs uppercase tracking-[0.22em] text-accent">{p.category}</p>
-                <h2 className="mt-3 font-display text-xl leading-snug">{p.title}</h2>
-                <p className="mt-3 text-sm text-foreground/65">{p.excerpt}</p>
+                <p className="mt-6 text-xs uppercase tracking-[0.22em] text-accent">{t(p.category)}</p>
+                <h2 className="mt-3 font-display text-xl leading-snug">{t(p.title)}</h2>
+                <p className="mt-3 text-sm text-foreground/65">{t(p.excerpt)}</p>
                 <p className="mt-4 text-xs text-foreground/45">
-                  {p.date} · {p.readTime}
+                  {t(p.date)} · {t(p.readTime)}
                 </p>
               </Link>
             </Reveal>

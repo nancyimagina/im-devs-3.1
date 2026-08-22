@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Reveal, CountUp } from "@/components/site/Reveal";
 import { Carousel } from "@/components/site/Carousel";
+import { useI18n } from "@/i18n/LanguageProvider";
 import hero from "@/assets/case-agione.jpg";
 import hero2 from "@/assets/case-agione-2.jpg";
 import hero3 from "@/assets/case-agione-3.jpg";
@@ -26,6 +27,7 @@ export const Route = createFileRoute("/case-studies/agione")({
 });
 
 function AgiOnePage() {
+  const { t } = useI18n();
   return (
     <>
       <section className="surface-noise bg-deep-gradient px-6 pb-16 pt-40 lg:px-10">
@@ -34,7 +36,7 @@ function AgiOnePage() {
             to="/case-studies"
             className="text-sm text-foreground/60 transition-colors hover:text-accent"
           >
-            ← Case studies
+            {t("← Case studies")}
           </Link>
           <p className="mt-8 text-xs uppercase tracking-[0.28em] text-accent">
             Logistics & Mission-Critical Operations
@@ -55,14 +57,14 @@ function AgiOnePage() {
       <section className="bg-deep py-24">
         <div className="mx-auto grid max-w-7xl gap-14 px-6 lg:grid-cols-2 lg:px-10">
           <Reveal>
-            <h2 className="font-display text-2xl">Challenge</h2>
+            <h2 className="font-display text-2xl">{t("Challenge")}</h2>
             <p className="mt-4 text-foreground/70">
               Legacy software and fragmented processes made it difficult to manage continuously
               changing airport operations across multiple locations.
             </p>
           </Reveal>
           <Reveal delay={100}>
-            <h2 className="font-display text-2xl">Solution</h2>
+            <h2 className="font-display text-2xl">{t("Solution")}</h2>
             <p className="mt-4 text-foreground/70">
               Imagina developed a unified web and mobile operational platform covering flight
               organization, ramp services and security-related workflows.
@@ -72,7 +74,7 @@ function AgiOnePage() {
 
         <div className="mx-auto mt-8 max-w-7xl px-6 lg:px-10">
           <Reveal>
-            <h2 className="font-display text-2xl">Key outcomes</h2>
+            <h2 className="font-display text-2xl">{t("Key outcomes")}</h2>
             <ul className="mt-6 grid gap-3 sm:grid-cols-2">
               {[
                 "Fewer manual errors",
@@ -83,7 +85,7 @@ function AgiOnePage() {
               ].map((o) => (
                 <li key={o} className="flex items-center gap-3 text-sm text-foreground/70">
                   <span className="size-1.5 rounded-full bg-accent" />
-                  {o}
+                  {t(o)}
                 </li>
               ))}
             </ul>
@@ -91,9 +93,9 @@ function AgiOnePage() {
 
           <div className="mt-16 grid gap-6 sm:grid-cols-3">
             {[
-              { value: <CountUp to={40} suffix="%" />, label: "Estimated reduction in manual errors" },
-              { value: <CountUp to={30} suffix="%" />, label: "Estimated reduction in response times" },
-              { value: <CountUp to={20} suffix="%" />, label: "Faster completion of key processes" },
+              { value: <CountUp to={40} suffix="%" />, label: T("Estimated reduction in manual errors" },
+              { value: <CountUp to={30} suffix="%" />, label: T("Estimated reduction in response times" },
+              { value: <CountUp to={20} suffix="%" />, label: T("Faster completion of key processes" },
             ].map((s, i) => (
               <Reveal key={i} delay={i * 100}>
                 <div className="rounded-2xl border border-border bg-surface/40 p-8">
@@ -108,7 +110,7 @@ function AgiOnePage() {
             to="/contact"
             className="mt-16 inline-flex rounded-full bg-accent px-6 py-3 text-sm font-medium text-accent-foreground transition-transform duration-300 hover:-translate-y-0.5"
           >
-            Talk to us →
+            {t("Talk to us →")}
           </Link>
         </div>
       </section>

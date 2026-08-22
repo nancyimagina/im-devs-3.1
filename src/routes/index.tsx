@@ -5,6 +5,9 @@ import { ClientLogos } from "@/components/site/ClientLogos";
 import { Reveal, CountUp } from "@/components/site/Reveal";
 import { Testimonials } from "@/components/site/Testimonials";
 import { BLOG_POSTS } from "@/data/blog";
+import { useI18n } from "@/i18n/LanguageProvider";
+import logoRenuity from "@/assets/logos/logo-renuity.png.asset.json";
+import logoAgione from "@/assets/logos/logo-agione.png.asset.json";
 import caseRenuity from "@/assets/case-renuity.jpg";
 import caseAgione from "@/assets/case-agione.jpg";
 
@@ -77,6 +80,7 @@ const WHY = [
 ];
 
 function Home() {
+  const { t } = useI18n();
   return (
     <>
       <Hero />
@@ -84,9 +88,9 @@ function Home() {
       <section className="bg-deep py-16">
         <div className="mx-auto grid max-w-7xl gap-10 px-6 sm:grid-cols-3 lg:px-10">
           {[
-            { value: <CountUp to={8} suffix="+" />, label: "Years — long-term client partnership" },
-            { value: "Senior", label: "Engineering — experienced technical teams" },
-            { value: "U.S.", label: "Aligned — direct collaboration with U.S. teams" },
+            { value: <CountUp to={8} suffix="+" />, label: t("Years — long-term client partnership") },
+            { value: t("Senior"), label: t("Engineering — experienced technical teams") },
+            { value: t("U.S."), label: t("Aligned — direct collaboration with U.S. teams") },
           ].map((item, i) => (
             <Reveal key={i} delay={i * 90}>
               <p className="font-display text-4xl text-accent">{item.value}</p>
@@ -103,7 +107,7 @@ function Home() {
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
           <Reveal>
             <h2 className="max-w-2xl font-display text-3xl leading-tight text-balance-tight sm:text-5xl">
-              Built for teams that need to move fast
+              {t("Built for teams that need to move fast")}
             </h2>
           </Reveal>
           <div className="mt-16 grid gap-px overflow-hidden rounded-2xl border border-light-foreground/10 bg-light-foreground/10 sm:grid-cols-3">
@@ -111,8 +115,8 @@ function Home() {
               <Reveal key={s.title} delay={i * 110} className="bg-light">
                 <div className="h-full p-8">
                   <s.icon className="size-6 text-green-ink" strokeWidth={1.5} />
-                  <h3 className="mt-6 font-display text-xl">{s.title}</h3>
-                  <p className="mt-3 text-sm text-light-foreground/70">{s.copy}</p>
+                  <h3 className="mt-6 font-display text-xl">{t(s.title)}</h3>
+                  <p className="mt-3 text-sm text-light-foreground/70">{t(s.copy)}</p>
                 </div>
               </Reveal>
             ))}
@@ -122,7 +126,7 @@ function Home() {
               to="/expertise"
               className="mt-12 inline-flex text-sm font-medium text-green-ink transition-transform duration-300 hover:translate-x-1"
             >
-              Explore our expertise →
+              {t("Explore our expertise →")}
             </Link>
           </Reveal>
         </div>
@@ -133,11 +137,12 @@ function Home() {
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
           <Reveal>
             <h2 className="max-w-2xl font-display text-3xl leading-tight sm:text-5xl">
-              Industries & Expertise
+              {t("Industries & Expertise")}
             </h2>
             <p className="mt-5 max-w-xl text-foreground/65">
-              Technology expertise shaped by complex operations, real-world challenges and
-              long-term partnerships.
+              {t(
+                "Technology expertise shaped by complex operations, real-world challenges and long-term partnerships.",
+              )}
             </p>
           </Reveal>
           <div className="mt-16 grid gap-6 lg:grid-cols-3">
@@ -145,8 +150,8 @@ function Home() {
               <Reveal key={s.title} delay={i * 110}>
                 <div className="h-full rounded-2xl border border-border bg-surface/40 p-8 transition duration-500 hover:-translate-y-1 hover:border-accent/40 hover:shadow-[var(--shadow-accent)]">
                   <s.icon className="size-6 text-accent" strokeWidth={1.5} />
-                  <h3 className="mt-6 font-display text-xl">{s.title}</h3>
-                  <p className="mt-3 text-sm text-foreground/65">{s.copy}</p>
+                  <h3 className="mt-6 font-display text-xl">{t(s.title)}</h3>
+                  <p className="mt-3 text-sm text-foreground/65">{t(s.copy)}</p>
                 </div>
               </Reveal>
             ))}
@@ -156,7 +161,7 @@ function Home() {
               to="/expertise"
               className="mt-12 inline-flex text-sm font-medium text-accent transition-transform duration-300 hover:translate-x-1"
             >
-              Explore our expertise →
+              {t("Explore our expertise →")}
             </Link>
           </Reveal>
         </div>
@@ -167,11 +172,12 @@ function Home() {
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
           <Reveal>
             <h2 className="max-w-2xl font-display text-3xl leading-tight sm:text-5xl">
-              Real impact for real clients
+              {t("Real impact for real clients")}
             </h2>
             <p className="mt-5 max-w-xl text-light-foreground/70">
-              A few examples of how Imagina helps teams improve operations, modernize software and
-              scale technology.
+              {t(
+                "A few examples of how Imagina helps teams improve operations, modernize software and scale technology.",
+              )}
             </p>
           </Reveal>
 
@@ -180,6 +186,7 @@ function Home() {
               {
                 to: "/case-studies/renuity" as const,
                 img: caseRenuity,
+                logo: logoRenuity.url,
                 name: "Renuity",
                 cat: "Home Services & Field Operations",
                 copy: "Route optimization and mobile technology for field teams.",
@@ -187,6 +194,7 @@ function Home() {
               {
                 to: "/case-studies/agione" as const,
                 img: caseAgione,
+                logo: logoAgione.url,
                 name: "AgiOne",
                 cat: "Logistics & Airport Operations",
                 copy: "A unified platform for complex airport operations.",
@@ -197,18 +205,28 @@ function Home() {
                   <div className="overflow-hidden rounded-2xl">
                     <img
                       src={c.img}
-                      alt={`${c.name} case study`}
+                      alt={`${c.name} ${t("case study")}`}
                       loading="lazy"
                       width={1280}
                       height={860}
                       className="h-72 w-full object-cover transition-transform duration-700 group-hover:scale-105"
                     />
                   </div>
-                  <p className="mt-6 text-xs uppercase tracking-[0.22em] text-green-ink">{c.cat}</p>
-                  <h3 className="mt-3 font-display text-2xl">{c.name}</h3>
-                  <p className="mt-2 text-sm text-light-foreground/70">{c.copy}</p>
+                  <p className="mt-6 text-xs uppercase tracking-[0.22em] text-green-ink">
+                    {t(c.cat)}
+                  </p>
+                  <div className="mt-4 flex items-center gap-4">
+                    <img
+                      src={c.logo}
+                      alt={c.name}
+                      loading="lazy"
+                      className="h-7 w-auto max-w-[130px] object-contain"
+                    />
+                    <h3 className="font-display text-2xl">{c.name}</h3>
+                  </div>
+                  <p className="mt-2 text-sm text-light-foreground/70">{t(c.copy)}</p>
                   <span className="mt-4 inline-flex text-sm font-medium text-green-ink transition-transform duration-300 group-hover:translate-x-1">
-                    See the full story →
+                    {t("See the full story →")}
                   </span>
                 </Link>
               </Reveal>
@@ -222,26 +240,26 @@ function Home() {
         <div className="mx-auto grid max-w-7xl gap-16 px-6 lg:grid-cols-[0.9fr_1.1fr] lg:px-10">
           <Reveal>
             <h2 className="font-display text-3xl leading-tight sm:text-5xl">
-              Your engineering team, extended.
+              {t("Your engineering team, extended.")}
             </h2>
             <p className="mt-6 max-w-md text-foreground/65">
-              Imagina Devs is a nearshore software development partner for U.S. companies,
-              providing senior engineering talent through staff augmentation and custom
-              development.
+              {t(
+                "Imagina Devs is a nearshore software development partner for U.S. companies, providing senior engineering talent through staff augmentation and custom development.",
+              )}
             </p>
             <Link
               to="/about"
               className="mt-8 inline-flex text-sm font-medium text-accent transition-transform duration-300 hover:translate-x-1"
             >
-              More about Imagina →
+              {t("More about Imagina →")}
             </Link>
           </Reveal>
           <div className="grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2">
             {WHY.map((w, i) => (
               <Reveal key={w.title} delay={i * 90} className="bg-deep">
                 <div className="h-full p-8">
-                  <h3 className="font-display text-lg">{w.title}</h3>
-                  <p className="mt-3 text-sm text-foreground/65">{w.copy}</p>
+                  <h3 className="font-display text-lg">{t(w.title)}</h3>
+                  <p className="mt-3 text-sm text-foreground/65">{t(w.copy)}</p>
                 </div>
               </Reveal>
             ))}
@@ -255,9 +273,9 @@ function Home() {
       <section id="blog" className="bg-deep py-28">
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
           <Reveal>
-            <p className="text-xs uppercase tracking-[0.28em] text-accent">Blog</p>
+            <p className="text-xs uppercase tracking-[0.28em] text-accent">{t("Blog")}</p>
             <h2 className="mt-6 max-w-2xl font-display text-3xl leading-tight sm:text-5xl">
-              Engineering insights
+              {t("Engineering insights")}
             </h2>
           </Reveal>
 
@@ -290,7 +308,7 @@ function Home() {
               to="/blog"
               className="mt-12 inline-flex text-sm font-medium text-accent transition-transform duration-300 hover:translate-x-1"
             >
-              Read the blog →
+              {t("Read the blog →")}
             </Link>
           </Reveal>
         </div>
@@ -301,17 +319,18 @@ function Home() {
         <div className="mx-auto max-w-3xl px-6 text-center lg:px-10">
           <Reveal>
             <h2 className="font-display text-3xl leading-tight sm:text-5xl">
-              Ready to scale your engineering team?
+              {t("Ready to scale your engineering team?")}
             </h2>
             <p className="mx-auto mt-6 max-w-xl text-foreground/65">
-              Tell us what you&apos;re building, what you&apos;re trying to solve, or where your
-              team needs support.
+              {t(
+                "Tell us what you're building, what you're trying to solve, or where your team needs support.",
+              )}
             </p>
             <Link
               to="/contact"
               className="mt-9 inline-flex rounded-full bg-accent px-6 py-3 text-sm font-medium text-accent-foreground transition-transform duration-300 hover:-translate-y-0.5"
             >
-              Let&apos;s talk →
+              {t("Let's talk →")}
             </Link>
           </Reveal>
         </div>

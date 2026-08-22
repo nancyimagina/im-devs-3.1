@@ -1,5 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Reveal } from "@/components/site/Reveal";
+import { useI18n } from "@/i18n/LanguageProvider";
+import logoRenuity from "@/assets/logos/logo-renuity.png.asset.json";
+import logoAgione from "@/assets/logos/logo-agione.png.asset.json";
 import caseRenuity from "@/assets/case-renuity.jpg";
 import caseAgione from "@/assets/case-agione.jpg";
 
@@ -26,6 +29,7 @@ const CASES = [
   {
     to: "/case-studies/renuity" as const,
     img: caseRenuity,
+    logo: logoRenuity.url,
     name: "Renuity — Optimizing field operations",
     cat: "Home Services & Field Operations",
     copy: "Route optimization and mobile technology for field teams, built over 8+ years of collaboration.",
@@ -33,6 +37,7 @@ const CASES = [
   {
     to: "/case-studies/agione" as const,
     img: caseAgione,
+    logo: logoAgione.url,
     name: "AgiOne — Modernizing airport operations",
     cat: "Logistics & Mission-Critical Operations",
     copy: "A unified web and mobile platform for flight organization, ramp services and security workflows.",
@@ -40,13 +45,14 @@ const CASES = [
 ];
 
 function CaseStudiesPage() {
+  const { t } = useI18n();
   return (
     <>
       <section className="surface-noise bg-deep-gradient px-6 pb-20 pt-40 lg:px-10">
         <div className="mx-auto max-w-7xl">
-          <p className="text-xs uppercase tracking-[0.28em] text-accent">Case Studies</p>
+          <p className="text-xs uppercase tracking-[0.28em] text-accent">{t("Case Studies")}</p>
           <h1 className="mt-6 max-w-3xl font-display text-4xl leading-[1.08] sm:text-6xl">
-            Real impact for real clients.
+            {t("Real impact for real clients.")}
           </h1>
         </div>
       </section>
@@ -66,11 +72,17 @@ function CaseStudiesPage() {
                     className="h-80 w-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                 </div>
-                <p className="mt-6 text-xs uppercase tracking-[0.22em] text-accent">{c.cat}</p>
-                <h2 className="mt-3 font-display text-2xl">{c.name}</h2>
-                <p className="mt-3 text-sm text-foreground/65">{c.copy}</p>
+                <p className="mt-6 text-xs uppercase tracking-[0.22em] text-accent">{t(c.cat)}</p>
+                <img
+                  src={c.logo}
+                  alt={c.name}
+                  loading="lazy"
+                  className="mt-4 h-8 w-auto max-w-[140px] object-contain"
+                />
+                <h2 className="mt-3 font-display text-2xl">{t(c.name)}</h2>
+                <p className="mt-3 text-sm text-foreground/65">{t(c.copy)}</p>
                 <span className="mt-4 inline-flex text-sm font-medium text-accent transition-transform duration-300 group-hover:translate-x-1">
-                  See the full story →
+                  {t("See the full story →")}
                 </span>
               </Link>
             </Reveal>

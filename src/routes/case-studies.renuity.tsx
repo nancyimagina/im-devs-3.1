@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Reveal, CountUp } from "@/components/site/Reveal";
 import { Carousel } from "@/components/site/Carousel";
+import { useI18n } from "@/i18n/LanguageProvider";
 import hero from "@/assets/case-renuity.jpg";
 import hero2 from "@/assets/case-renuity-2.jpg";
 import hero3 from "@/assets/case-renuity-3.jpg";
@@ -26,6 +27,7 @@ export const Route = createFileRoute("/case-studies/renuity")({
 });
 
 function RenuityPage() {
+  const { t } = useI18n();
   return (
     <>
       <section className="surface-noise bg-deep-gradient px-6 pb-16 pt-40 lg:px-10">
@@ -34,7 +36,7 @@ function RenuityPage() {
             to="/case-studies"
             className="text-sm text-foreground/60 transition-colors hover:text-accent"
           >
-            ← Case studies
+            {t("← Case studies")}
           </Link>
           <p className="mt-8 text-xs uppercase tracking-[0.28em] text-accent">
             Home Services & Field Operations
@@ -56,14 +58,14 @@ function RenuityPage() {
       <section className="bg-deep py-24">
         <div className="mx-auto grid max-w-7xl gap-14 px-6 lg:grid-cols-2 lg:px-10">
           <Reveal>
-            <h2 className="font-display text-2xl">Challenge</h2>
+            <h2 className="font-display text-2xl">{t("Challenge")}</h2>
             <p className="mt-4 text-foreground/70">
               Legacy systems and an outdated mobile experience were making scheduling, time
               tracking and field operations harder to manage.
             </p>
           </Reveal>
           <Reveal delay={100}>
-            <h2 className="font-display text-2xl">Solution</h2>
+            <h2 className="font-display text-2xl">{t("Solution")}</h2>
             <p className="mt-4 text-foreground/70">
               Imagina worked as an extension of Renuity&apos;s team to develop technology for route
               optimization and field installation operations, including a custom mobile
@@ -74,7 +76,7 @@ function RenuityPage() {
 
         <div className="mx-auto mt-8 max-w-7xl px-6 lg:px-10">
           <Reveal>
-            <h2 className="font-display text-2xl">Key outcomes</h2>
+            <h2 className="font-display text-2xl">{t("Key outcomes")}</h2>
             <ul className="mt-6 grid gap-3 sm:grid-cols-2">
               {[
                 "Real-time schedule visibility",
@@ -85,7 +87,7 @@ function RenuityPage() {
               ].map((o) => (
                 <li key={o} className="flex items-center gap-3 text-sm text-foreground/70">
                   <span className="size-1.5 rounded-full bg-accent" />
-                  {o}
+                  {t(o)}
                 </li>
               ))}
             </ul>
@@ -95,11 +97,11 @@ function RenuityPage() {
             {[
               {
                 value: <CountUp to={20} prefix="~" suffix="%" />,
-                label: "Productivity increase in the first quarter after launch",
+                label: T("Productivity increase in the first quarter after launch",
               },
               {
                 value: <CountUp to={95} suffix="%+" />,
-                label: "On-time project completion, up from around 85%",
+                label: T("On-time project completion, up from around 85%",
               },
             ].map((s, i) => (
               <Reveal key={i} delay={i * 100}>
@@ -115,7 +117,7 @@ function RenuityPage() {
             to="/contact"
             className="mt-16 inline-flex rounded-full bg-accent px-6 py-3 text-sm font-medium text-accent-foreground transition-transform duration-300 hover:-translate-y-0.5"
           >
-            Talk to us →
+            {t("Talk to us →")}
           </Link>
         </div>
       </section>

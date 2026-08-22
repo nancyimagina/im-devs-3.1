@@ -1,5 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Reveal } from "@/components/site/Reveal";
+import { useI18n } from "@/i18n/LanguageProvider";
+import logoRenuity from "@/assets/logos/logo-renuity.png.asset.json";
+import logoAgione from "@/assets/logos/logo-agione.png.asset.json";
 import imgRenuity from "@/assets/case-renuity.jpg";
 import imgAgione from "@/assets/case-agione.jpg";
 import imgSalesforce from "@/assets/cap-salesforce.jpg";
@@ -37,6 +40,7 @@ const AREAS = [
       "Route optimization",
       "Operational workflows",
     ],
+    logo: logoRenuity.url,
     proof: "Renuity — more than 8 years of collaboration.",
     to: "/case-studies/renuity" as const,
   },
@@ -52,6 +56,7 @@ const AREAS = [
       "APIs and integrations",
       "Multi-site workflows",
     ],
+    logo: logoAgione.url,
     proof: "AgiOne — unified web and mobile platform for airport operations.",
     to: "/case-studies/agione" as const,
   },
@@ -66,23 +71,26 @@ const AREAS = [
       "Salesforce integrations",
       "Enterprise platform development",
     ],
+    logo: null,
     proof: null,
     to: null,
   },
 ];
 
 function ExpertisePage() {
+  const { t } = useI18n();
   return (
     <>
       <section className="surface-noise bg-deep-gradient px-6 pb-20 pt-40 lg:px-10">
         <div className="mx-auto max-w-7xl">
-          <p className="text-xs uppercase tracking-[0.28em] text-accent">Expertise</p>
+          <p className="text-xs uppercase tracking-[0.28em] text-accent">{t("Expertise")}</p>
           <h1 className="mt-6 max-w-3xl font-display text-4xl leading-[1.08] sm:text-6xl">
-            Where we have real experience.
+            {t("Where we have real experience.")}
           </h1>
           <p className="mt-6 max-w-xl text-foreground/65">
-            Technology expertise shaped by complex operations, real-world challenges and long-term
-            partnerships.
+            {t(
+              "Technology expertise shaped by complex operations, real-world challenges and long-term partnerships.",
+            )}
           </p>
         </div>
       </section>
@@ -96,33 +104,41 @@ function ExpertisePage() {
                   <div className="mb-8 overflow-hidden rounded-2xl border border-border">
                     <img
                       src={area.image}
-                      alt={area.title}
+                      alt={t(area.title)}
                       loading="lazy"
                       width={1280}
                       height={860}
                       className="h-56 w-full object-cover"
                     />
                   </div>
-                  <h2 className="font-display text-2xl leading-snug sm:text-3xl">{area.title}</h2>
+                  {area.logo && (
+                    <img
+                      src={area.logo}
+                      alt={area.title}
+                      loading="lazy"
+                      className="mb-5 h-8 w-auto max-w-[140px] object-contain"
+                    />
+                  )}
+                  <h2 className="font-display text-2xl leading-snug sm:text-3xl">{t(area.title)}</h2>
                   {area.proof && (
-                    <p className="mt-5 text-sm text-accent">{area.proof}</p>
+                    <p className="mt-5 text-sm text-accent">{t(area.proof)}</p>
                   )}
                   {area.to && (
                     <Link
                       to={area.to}
                       className="mt-4 inline-flex text-sm font-medium text-foreground/70 transition-colors hover:text-accent"
                     >
-                      See the full story →
+                      {t("See the full story →")}
                     </Link>
                   )}
                 </div>
                 <div>
-                  <p className="text-foreground/70">{area.intro}</p>
+                  <p className="text-foreground/70">{t(area.intro)}</p>
                   <ul className="mt-8 grid gap-x-8 gap-y-3 sm:grid-cols-2">
                     {area.focus.map((f) => (
                       <li key={f} className="flex items-center gap-3 text-sm text-foreground/70">
                         <span className="size-1.5 rounded-full bg-accent" />
-                        {f}
+                        {t(f)}
                       </li>
                     ))}
                   </ul>
